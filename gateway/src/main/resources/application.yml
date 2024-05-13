@@ -1,0 +1,20 @@
+server:
+  port: 8085
+
+eureka:
+  client:
+    registry-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+#spring:
+#  application:
+#    name: gateway
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: employee
+#          uri: http://localhost:8081
+#          predicates:
+#            - Path=/employee/**
