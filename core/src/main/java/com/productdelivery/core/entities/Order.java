@@ -1,5 +1,6 @@
 package com.productdelivery.core.entities;
 
+import com.productdelivery.core.dtos.delivery.DeliveryInfo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,21 +8,28 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Table(name = "TB_EMPLOYEES")
+@Table(name = "TB_ORDER")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Employee {
+@AllArgsConstructor
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    private String name;
+    @ManyToOne
+    private Customer customer;
 
-    private String registryNumber;
+    @OneToMany
+    private List<ProductSold> productsSold;
+
+    private Address deliveryAddress;
+
+    private DeliveryInfo deliveryInfo;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

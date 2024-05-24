@@ -9,19 +9,21 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "TB_EMPLOYEES")
+@Table(name = "TB_PRODUCTS_SOLD")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Employee {
+@AllArgsConstructor
+public class ProductSold {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
+    private String ref;
+
     private String name;
 
-    private String registryNumber;
+    private int quantitySold;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

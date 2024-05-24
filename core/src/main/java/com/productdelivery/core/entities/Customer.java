@@ -7,13 +7,14 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Table(name = "TB_EMPLOYEES")
+@Table(name = "TB_CUSTOMERS")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Employee {
+@AllArgsConstructor
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -21,7 +22,10 @@ public class Employee {
 
     private String name;
 
-    private String registryNumber;
+    private String email;
+
+    @OneToMany
+    private List<Order> orders;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
