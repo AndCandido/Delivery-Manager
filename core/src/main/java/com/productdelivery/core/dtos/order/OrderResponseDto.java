@@ -13,7 +13,7 @@ import java.util.List;
 @Builder
 public record OrderResponseDto(
     String id,
-    CustomerResponseDto customerResponseDto,
+    CustomerResponseDto customer,
     List<ProductSoldResponseDto> productsSold,
     Address deliveryAddress,
     DeliveryInfo deliveryInfo,
@@ -29,7 +29,7 @@ public record OrderResponseDto(
 
         return OrderResponseDto.builder()
             .id(order.getId())
-            .customerResponseDto(customerResponseDto)
+            .customer(customerResponseDto)
             .productsSold(productSoldResponseDtos)
             .deliveryAddress(order.getDeliveryAddress())
             .createdAt(order.getCreatedAt())

@@ -6,7 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,7 +18,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order {
+public class Order implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -23,12 +26,14 @@ public class Order {
 
     @ManyToOne
     private Customer customer;
-
+    
     @OneToMany
     private List<ProductSold> productsSold;
 
+    @JdbcTypeCode(SqlTypes.JSON)
     private Address deliveryAddress;
 
+    @JdbcTypeCode(SqlTypes.JSON)
     private DeliveryInfo deliveryInfo;
 
     @CreationTimestamp
