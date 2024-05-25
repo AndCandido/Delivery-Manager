@@ -16,7 +16,6 @@ public class ApplicationControllerAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiErrorResponse> handlerMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
-
         List<String> errors =
             ex.getBindingResult().getAllErrors().stream().map(ObjectError::getDefaultMessage).toList();
 

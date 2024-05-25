@@ -1,5 +1,6 @@
 package com.productdelivery.ms.employee.service.impl;
 
+import com.productdelivery.core.application.util.CopyPropertiesUtil;
 import com.productdelivery.core.dtos.employee.EmployeeRequestDto;
 import com.productdelivery.core.dtos.employee.EmployeeResponseDto;
 import com.productdelivery.core.entities.Employee;
@@ -16,16 +17,15 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     private final IEmployeeRepository employeeRepository;
 
-
     @Override
     public EmployeeResponseDto getEmployeeById(String employeeId) {
         Employee employeeFound = findEmployeeById(employeeId);
-        return new EmployeeResponseDto(employeeFound);
+        return EmployeeResponseDto.modelToDto(employeeFound);
     }
 
     private Employee findEmployeeById(String employeeId) {
         return employeeRepository.findById(employeeId)
-            .orElseThrow(() -> new ResourceNotFoundException("Employee does not exists"));
+            .orElseThrow(() -> new ResourceNotFoundException("employee does not exists"));
     }
 
     @Override
@@ -33,13 +33,13 @@ public class EmployeeServiceImpl implements IEmployeeService {
         Employee newEmployee = new Employee();
         BeanUtils.copyProperties(employeeRequestDto, newEmployee);
         employeeRepository.save(newEmployee);
-        return new EmployeeResponseDto(newEmployee);
+        return EmployeeResponseDto.modelToDto(newEmployee);
     }
 
     @Override
     public void updateEmployee(EmployeeRequestDto employeeRequestDto, String employeeId) {
         Employee employeeFound = findEmployeeById(employeeId);
-        BeanUtils.copyProperties(employeeRequestDto, employeeFound);
+        CopyPropertiesUtil.copyNonNullProperties(employeeRequestDto, employeeFound);
         employeeRepository.save(employeeFound);
     }
 
