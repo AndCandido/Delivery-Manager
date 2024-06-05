@@ -1,6 +1,5 @@
 package com.productdelivery.ms.customer.service;
 
-import com.productdelivery.core.dtos.customer.CustomerOrdersResponseDto;
 import com.productdelivery.core.dtos.customer.CustomerRequestDto;
 import com.productdelivery.core.dtos.customer.CustomerResponseDto;
 
